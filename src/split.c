@@ -16,7 +16,9 @@
  * @param x Message 1
  * @param y Message 2
  *
- * @return True if x is more recent than y
+ * @return -1: if x is older than y
+ *          0: if x and y have the same delivery date
+ *          1: if x is newer than y
  */
 int compare(const void *x, const void *y)
 {
@@ -29,7 +31,7 @@ int compare(const void *x, const void *y)
     tx = mktime(&xtm);
     ty = mktime(&ytm);
 
-    return tx > ty;
+    return (tx < ty) ? -1 : ((tx == ty) ? 0 : 1);
 }
 
 /**

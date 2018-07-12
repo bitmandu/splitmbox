@@ -67,7 +67,7 @@ int mbox_header(const char *message, char *header, int n)
     }
 
     header[n-1] = '\0';
-    return 0;
+    return 1;
 }
 
 /**
@@ -88,9 +88,8 @@ int mbox_time(const char *message, struct tm *time)
     for (int i = 5; i < n; i++) {
         if (*(message + i) == ' ') {
             // foundit becomes true after the sender envelope, and is
-            // assigned true until the first nonwhitespace character
+            // reassigned true until the first non-whitespace character
             foundit = true;
-
             continue;
         } else if (foundit) {
             datestr = message + i;
@@ -99,14 +98,18 @@ int mbox_time(const char *message, struct tm *time)
     }
 
     // try different datetime formats until one works
-    char *format[2] = {"%a %b %d %H:%M:%S %Y",
-                       "%a %b %d %H:%M:%S +0000 %Y"};
+    char *format[2] = {
+        "%a %b %d %H:%M:%S %z %Y",  // option 1: used by Google
+        "%a %b %d %H:%M:%S %Y"};    // option 2: mbox standard format
+
     for (int i = 0; i < 2; i++) {
         if (strptime(datestr, format[i], time) != NULL) {
+            time->tm_isdst = -1;  // tell mktime() to check for DST
             return 0;
         }
     }
 
+    perror(__func__);
     return 1;
 }
 
