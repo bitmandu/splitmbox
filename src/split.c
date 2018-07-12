@@ -42,7 +42,7 @@ int compare(const void *x, const void *y)
  *
  * @return Error if unable to open output file(s)
  */
-int write_by_month(char *messages[], unsigned int n)
+int write_by_month(char *messages[], int n)
 {
     int month, open_month = 0;
     char filename[12];
@@ -51,7 +51,7 @@ int write_by_month(char *messages[], unsigned int n)
 
     qsort(messages, n, sizeof(char *), compare);
 
-    for (unsigned int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         mbox_time(messages[i], &time);
         month = time.tm_mon;
 

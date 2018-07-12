@@ -27,7 +27,7 @@ int main(void)
 {
     char *mbox;
     char **messages;
-    unsigned int n;   // number of messages
+    int n;   // number of messages
 
     mbox = malloc(ALLOCSIZE*sizeof(char));
     messages = (char **) malloc(MAX_MESSAGES*sizeof(char *));
