@@ -14,7 +14,6 @@ Installation
 
 Compile splitmbox using the gcc-based Makefile.
 
-    $ cd src
     $ make
 
 Usage
