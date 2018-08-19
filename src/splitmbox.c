@@ -15,7 +15,7 @@
 /**
  * Maximum number of messages in mbox.
  */
-#define MAX_MESSAGES 500000
+#define MAX_MESSAGES 500000L
 
 /**
  * Splits mbox (received on standard input) into seperate YYYYMM.mbox
@@ -27,7 +27,7 @@ int main(void)
 {
     char *mbox;
     char **messages;
-    int n;   // number of messages
+    long n;   // number of messages
 
     mbox = malloc(ALLOCSIZE*sizeof(char));
     messages = (char **) malloc(MAX_MESSAGES*sizeof(char *));

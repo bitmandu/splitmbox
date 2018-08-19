@@ -9,4 +9,4 @@
 int mbox_envsender(const char *, char *, int);
 int mbox_header(const char *, char *, int);
 int mbox_time(const char *, struct tm *);
-int mbox_read(char *, char **, unsigned long);
+long mbox_read(char *, char **, long);

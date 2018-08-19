@@ -7,4 +7,4 @@
 #pragma once
 
 int compare(const void *, const void *);
-int write_by_month(char **, unsigned int);
+int write_by_month(char **, long);

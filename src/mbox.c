@@ -122,7 +122,7 @@ int mbox_time(const char *message, struct tm *time)
  *
  * @return Number of messages or -1 if there is insufficient memory
  */
-int mbox_read(char *mbox, char *messages[], int n)
+long mbox_read(char *mbox, char *messages[], long n)
 {
     char *p;     // pointer to next available mememory address in mbox
     size_t len;  // line length
@@ -131,7 +131,7 @@ int mbox_read(char *mbox, char *messages[], int n)
     char *line = NULL;
     size_t size = 0;
 
-    int i = 0;
+    long i = 0;
     while ((len = getline(&line, &size, stdin))) {
         if (len == -1) {
             free(line);
@@ -156,7 +156,7 @@ int mbox_read(char *mbox, char *messages[], int n)
 
             // terminate the previous message
             if (i > 0) {
-                *(p-1) = '\0';
+                *(p - 1) = '\0';
             }
 
             i++;
